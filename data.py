@@ -61,12 +61,17 @@ class Color:
 
 
 class Finish:
-    def __init__(self, ambient, diffuse):
+    def __init__(self, ambient, diffuse, specular, roughness):
         self.ambient = ambient  # percentage of ambient light reflected by the finish
         self.diffuse = diffuse  # percentage of diffuse light reflected by finish
+        self.specular = specular  # percentage of specular light reflected by finish
+        self.roughness = roughness   # spread of specular light across the object
 
     def __eq__(self, other):
-        return utility.epsilon_equal(self.ambient, other.ambient, 0.00001) and utility.epsilon_equal(self.diffuse, other.diffuse, 0.00001)
+        return utility.epsilon_equal(self.ambient, other.ambient, 0.00001) and \
+               utility.epsilon_equal(self.diffuse, other.diffuse, 0.00001) and \
+               utility.epsilon_equal(self.specular, other.specular, 0.00001) and \
+               utility.epsilon_equal(self.roughness, other.roughness, 0.00001)
 
 class Light:
     def __init__(self, pt: Point, color: Color):
